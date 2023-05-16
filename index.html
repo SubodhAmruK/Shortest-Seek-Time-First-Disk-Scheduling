@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSTF Disk Scheduling</title>
+  <link rel="stylesheet" href="stylessheet1.css">
+</head>
+<body>
+  <h1>Shortest Seek Time First Disk Scheduling</h1>
+
+  <input type="text" id="request" placeholder="Enter the requests (comma-separated)"  ><br/>
+  
+  <input type="text" id="head" placeholder="Enter the head position"><br/>
+  <div class="buttons">
+    <button id="button"onclick="shortestSeekTimeFirst()">Calculate</button>
+    <button id="clearButton" onclick="clearInputs()">Clear</button>
+  </div>  
+  <div>
+    <p id="message">Click the calculate button to get the sequence</p>
+    <p id="totalSeekCount"></p>
+    <p>Seek sequence is:</p>
+    <ul id="seekSequenceList"></ul>
+  </div>
+
+  <script>
+    function calculatedifference(request, head) {
+      const diff = [];
+      for (let i = 0; i < request.length; i++) {
+        diff.push(Math.abs(head - request[i]));
+      }
+      return diff;
+    }
+
+    function findMIN(diff) {
+      let minimum = Number.MAX_VALUE;
+      let index = -1;
+      for (let i = 0; i < diff.length; i++) {
+        if (diff[i] < minimum) {
+          minimum = diff[i];
+          index = i;
+        }
+      }
+      return index;
+    }
+
+    function shortestSeekTimeFirst() {
+      const requestInput = document.getElementById("request").value;
+      const request = requestInput.split(",").map(Number);
+      let head = parseInt(document.getElementById("head").value);
+      const n = request.length;
+
+      if (n === 0) {
+        return;
+      }
+
+      const diff = calculatedifference(request, head);
+      const seeksequence = Array(n + 1).fill(0);
+      let seekcount = 0;
+
+      for (let i = 0; i < n; i++) {
+        seeksequence[i] = head;
+        const index = findMIN(diff);
+        const minimum = diff[index];
+        diff[index] = Number.MAX_VALUE;
+        seekcount += minimum;
+        head = request[index];
+      }
+
+      seeksequence[n] = head;
+
+      const totalSeekCount = document.getElementById("totalSeekCount");
+      totalSeekCount.textContent = "Total number of seek operations = " + seekcount;
+      const seekSequenceList = document.getElementById("seekSequenceList");
+      seekSequenceList.innerHTML = "<li>" + seeksequence.join("</li><li>") + "</li>";
+
+      const message = document.getElementById("message");
+      message.textContent = "Sequence retrieved!";
+    }
+
+    function clearInputs() {
+      document.getElementById("request").value = "";
+      document.getElementById("head").value = "";
+
+      const totalSeekCount = document.getElementById("totalSeekCount");
+      totalSeekCount.textContent = "";
+
+      const seekSequenceList = document.getElementById("seekSequenceList");
+      seekSequenceList.innerHTML = "";
+
+      const message = document.getElementById("message");
+      message.textContent = "Click the calculate button to get the sequence";
+}
+
+  </script>
+</body>
+</html>
