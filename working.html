@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Working - SSTF Disk Scheduling</title>
+  <link rel="stylesheet" href="stylessheet1.css">
+</head>
+<header>
+    <h2>Shortest Seek Time First (SSTF) Disk Scheduling Algorithm</h2>
+</header>
+<body>
+    <body>
+        
+      
+        <p>To demonstrate the working of the Shortest Seek Time First (SSTF) disk scheduling algorithm, let's use the following disk requests with the initial head position at 50:</p>
+      
+        <p>176, 79, 34, 60, 92, 11, 41, 114</p>
+      
+        <p>Here's the step-by-step process:</p>
+      
+        <ol>
+          <li>Start with the head at position 50.</li>
+          <li>Calculate the absolute differences between the head position and each request:</li>
+          <ul>
+            <li>|176 - 50| = 126</li>
+            <li>|79 - 50| = 29</li>
+            <li>|34 - 50| = 16</li>
+            <li>|60 - 50| = 10</li>
+            <li>|92 - 50| = 42</li>
+            <li>|11 - 50| = 39</li>
+            <li>|41 - 50| = 9</li>
+            <li>|114 - 50| = 64</li>
+          </ul>
+          <li>Select the request with the smallest absolute difference, which is 41 (9 seek time).</li>
+          <li>Move the head to position 41.</li>
+          <li>Remove the processed request from the list.</li>
+          <li>Remaining requests: 176, 79, 34, 60, 92, 11, 114</li>
+          <li>Repeat steps 2-5 until all requests have been processed:</li>
+          <ul>
+            <li>|176 - 41| = 135</li>
+            <li>|79 - 41| = 38</li>
+            <li>|34 - 41| = 7</li>
+            <li>|60 - 41| = 19</li>
+            <li>|92 - 41| = 51</li>
+            <li>|11 - 41| = 30</li>
+            <li>|114 - 41| = 73</li>
+          </ul>
+          <li>The next request with the smallest absolute difference is 34 (7 seek time).</li>
+          <li>Move the head to position 34 and remove it from the list.</li>
+          <li>Remaining requests: 176, 79, 60, 92, 11, 114</li>
+          <li>Repeat steps 2-5 until all requests have been processed:</li>
+          <ul>
+            <li>...</li>
+            <!-- Repeat the remaining steps similarly -->
+          </ul>
+        </ol>
+      
+        <p>The total seek time in this scenario is the sum of the seek times for each request: 9 + 7 + 26 + 19 + 13 + 22 + 103 + 165 = 364.</p>
+      </body>
+      
+  </div>
+</body>
+</html>

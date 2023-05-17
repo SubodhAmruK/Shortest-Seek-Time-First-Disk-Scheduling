@@ -10,18 +10,20 @@
 <body>
   <h1>Shortest Seek Time First Disk Scheduling</h1>
 
-  <input type="text" id="request" placeholder="Enter the requests (comma-separated)"  ><br/>
+  <input type="text" id="request" placeholder="Enter the requests (comma-separated)"><br/>
   
   <input type="text" id="head" placeholder="Enter the head position"><br/>
   <div class="buttons">
-    <button id="button"onclick="shortestSeekTimeFirst()">Calculate</button>
+    <button id="button" onclick="shortestSeekTimeFirst()">Calculate</button>
     <button id="clearButton" onclick="clearInputs()">Clear</button>
+    <button id="showWorking" onclick="showWorking()">How it Works?</button>
   </div>  
   <div>
     <p id="message">Click the calculate button to get the sequence</p>
     <p id="totalSeekCount"></p>
     <p>Seek sequence is:</p>
     <ul id="seekSequenceList"></ul>
+    
   </div>
 
   <script>
@@ -93,6 +95,13 @@
       message.textContent = "Click the calculate button to get the sequence";
 }
 
-  </script>
+function showWorking() {
+  const a = document.createElement("a");
+  a.href = "working.html";
+  a.target = "_blank";
+  a.click();
+}
+</script>
+
 </body>
 </html>
